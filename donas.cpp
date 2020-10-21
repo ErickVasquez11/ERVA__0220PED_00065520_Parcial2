@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -21,26 +22,39 @@ struct Cliente {
     vector<Producto> productos;
 };
 //Funciones
-void menuDonas(queue<Producto>&donas){
+void menuDonas(queue<Cliente>&donas){
     int opcion;
     bool status =true;
-    Producto Donas;
+    Cliente cliente;
     while(status){
-          cout<<"\n++++++++ Menu de Donas ++++++++\n"<<endl;
-          cout<<"\t1. Dona sencilla................$1.00"<<endl;
-          cout<<"2. Rellena de leche................$1.25"<<endl;
-          cout<<"3. Sabores especiales(Moca,caramelo).......$1.50"<<endl;
+          cout<<"\n+++++++++++++ Menu de Donas +++++++++++++"<<endl;
+          cout<<"1. Dona sencilla_____________________________$1.00"<<endl;
+          cout<<"2. Rellena de leche_____________________________$1.25"<<endl;
+          cout<<"3. Sabores especiales(Moca,caramelo)_____________________________$1.50"<<endl;
           cout<<"4. Salir"<<endl;
         cout<<"\nOpcion: ";   cin>>opcion;
 
         switch(opcion){
-            case 1: cout<<"Tomando pedido";
-                    
-                   
+            case 1: cout<<"Tomando pedido"<<endl;
+                    cout<<"Ingrese el apellido:";
+                    getline(cin,cliente.apellido);
+                    cin.ignore();
+                    cout<<"Producto: Dona Sencilla";
+                    donas.push(cliente);                  
             break;
-            case 2: 
+            case 2: cout<<"Tomando pedido"<<endl;
+                    cout<<"Ingrese el apellido:";
+                    getline(cin,cliente.apellido);
+                    cin.ignore();
+                    cout<<"Producto: Rellena de leche";
+                    donas.push(cliente); 
             break;
-            case 3: 
+            case 3: cout<<"Tomando pedido"<<endl;
+                    cout<<"Ingrese el apellido:";
+                    getline(cin,cliente.apellido);
+                    cin.ignore();
+                    cout<<"Producto: Sabores especiales";
+                    donas.push(cliente); 
             break;
             case 4: return;
             break;
@@ -49,24 +63,39 @@ void menuDonas(queue<Producto>&donas){
     }
     
 }
-void menuPlatosFuertes(queue<ProductoFuerte>&platosfuertes){
+void menuPlatosFuertes(queue<Cliente>&platosfuertes){
     int opcion;
     bool status =true;
+    Cliente cliente;
     while(status){
-          cout<<"\n++++++++ Menu de Platos Fuertes ++++++++\n"<<endl;
-          cout<<"1. Desayuno.............$2.50"<<endl;
-          cout<<"2. Almuerzo.............$5.00"<<endl;
-          cout<<"3. Cena.................$3.50"<<endl;
+          cout<<"\n+++++++++++++ Menu de Platos Fuertes +++++++++++++"<<endl;
+          cout<<"1. Desayuno_____________________________$2.50"<<endl;
+          cout<<"2. Almuerzo_____________________________$5.00"<<endl;
+          cout<<"3. Cena_____________________________$3.50"<<endl;
           cout<<"4. Salir"<<endl;
           cout<<"\nOpcion: ";   cin>>opcion;
 
          switch(opcion){
-            case 1: " Cuantos desayunos desea comprar: ";
-                    
+            case 1: cout<<"Tomando pedido"<<endl;
+                    cout<<"Ingrese el apellido:";
+                    getline(cin,cliente.apellido);
+                    cin.ignore();
+                    cout<<"Producto: Desayuno";
+                    platosfuertes.push(cliente); 
             break;
-            case 2: 
+            case 2:cout<<"Tomando pedido"<<endl;
+                    cout<<"Ingrese el apellido:";
+                    getline(cin,cliente.apellido);
+                    cin.ignore();
+                    cout<<"Producto: Almuerzo";
+                    platosfuertes.push(cliente);  
             break;
-            case 3: 
+            case 3: cout<<"Tomando pedido"<<endl;
+                    cout<<"Ingrese el apellido:";
+                    getline(cin,cliente.apellido);
+                    cin.ignore();
+                    cout<<"Producto: Cena";
+                    platosfuertes.push(cliente); 
             break;
             case 4: return;
             break;
@@ -74,47 +103,15 @@ void menuPlatosFuertes(queue<ProductoFuerte>&platosfuertes){
         }
     }
 }
-float Pedido(queue<Cliente> *colaClientes, float precio) {
-    //Verificación que haya clientes en la cola
-    if(colaClientes->empty()) {
-        cout << "No se ha realizado ningún cobro, no hab►1a clientes en la cola" << endl;
-        return 0;
-    }else {
-        //Recorrer la cola por medio de un while, cuya condición sea que la cola NO esté vacía
-        while(!colaClientes->empty()) {
-            //Asignar el cliente que se encuentra al frente de la cola a la variable cliente
-            Cliente cliente = colaClientes->front();
 
-            cout << "Factura de " << cliente.apellido<< "\t" <<endl;
-            //Recorrer la lista de los productos del cliente actuales con un for
-            for(int i = 0; i < cliente.productos.size(); i++) {
-                //Almacenar los valores de precio del producto en la posición i en la variable pago
-                precio += cliente.productos.at(i).precio;
-
-                cout << cliente.productos.at(i).nombre << ": $" << cliente.productos.at(i).precio << endl;
-            }
-
-            //Eliminar el cliente al frente de la cola porque ya fue atendido, y avanzar en la cola
-            colaClientes->pop();
-        }
-        return precio;
-    }
-}
-
-void menu2(queue<Producto>&donas,queue<ProductoFuerte>&platosfuertes){
-    queue<Cliente> colaClientes;
-    Cliente cliente;
-    string apellido;
-    
+void menu2(queue<Cliente>&donas,queue<Cliente>&platosfuertes){
     int opcion;
     bool status =true;
     while(status){
-        cout << " Ingrese su apellido: " << endl;
-        
-        cout<<"1. Desea comprar Donas"<<endl;
+        cout<<"\n1. Desea comprar Donas"<<endl;
         cout<<"2. Desea comprar Platos fuertes"<<endl;
         cout<<"3. Salir"<<endl;
-        cout<<"\nDigite la opcion: ";   cin>>opcion;
+        cout<<"\nOpcion: ";   cin>>opcion;
 
         switch(opcion){
             case 1: menuDonas(donas);
@@ -130,18 +127,14 @@ void menu2(queue<Producto>&donas,queue<ProductoFuerte>&platosfuertes){
 
 
 int main(){
-    
-    queue<Producto> donas;
-    queue<ProductoFuerte> platosfuertes;
+    queue<Cliente> donas;
+    queue<Cliente> platosfuertes;
 
-   
-    int totalPagado = 0;
-
-    int opcion;
+   int opcion;
     bool status = true;
     while(status){
         cout<<endl;
-        cout<<"*************MENU************"<<endl;
+        cout<<"+++++++++++++ MENU +++++++++++++"<<endl;
         cout<<"1. Atender pedidos de clientes"<<endl;
         cout<<"2. Calcular ganancias por venta de donas"<<endl;
         cout<<"3. Calcular ganancias por venta de platos fuertes"<<endl;
@@ -159,7 +152,7 @@ int main(){
             case 4: cout<<"El programa ha finalizado"<<endl;
             status = false;
             break;
-            default: cout<<"Opcion no valida"<<endl;
+            default: cout<<"Opcion NO valida"<<endl;
             break;
         }
     }
